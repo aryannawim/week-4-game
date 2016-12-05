@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Crystal Collector</title>
+
+<!--linking css, bootstrap, and jquery   -->
+
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+  <!-- Bootstrap File -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/cyborg/bootstrap.css">
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+</head>
+<body>
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-md-12">
+					<h1>Crystal Collector!!!</h1>
+					<h3>Instructions</h3>
+					<br>
+					
+
+					<div class="instructions">
+					<div class="col-md-4">
+						<p>You will be given a random number at the start of the game</p>
+						<p>There are 4 crystals below. By clicking on a crystal you will add a specific amount of points to your total score.</p>
+						<p>You win the game by matching your total score with the random number given to you in the beginning. However, if you go over the random number, you lose. </p>
+						<p>The value of each crystal is a mystery until you figure it out by clicking on it.</p>
+						<p>Every time the game restarts, the values of the crystals will change. </p>
+					</div>
+					<div class="col md-4"></div>
+					<div class="col md-4"></div>
+					</div>
+				</div>
+			</div>
+
+			<br>
+			<br>
+
+			<div class="row">
+
+				
+				<div class="col-md-8" text-center>
+					<h2>Match this number : <span class="numbertomatch"></span></h2>
+				</div>
+				<div class="col-md-4" text-center>
+					<h3>Your Score : <span class="guessScoredisplay"></span></h3>
+				</div>
+			
+			</div>
+
+
+			<div class="row">
+
+					<h4> Your Crystals to choose from </h4>
+					<br>
+
+				<div class="col-md-3">
+					<img class="clearcrystal" src="assets/images/clearcrystal.png" alt="clearcrystal" style="width:128px;height:128px;"></div>
+				<div class="col-md-3">
+					<img class="bluecrystal" src="assets/images/bluecrystal.png" alt="bluecrystal" style="width:128px;height:128px;"></div>
+				<div class="col-md-3">
+					<img class="redcrystal" src="assets/images/redcrystal.png" alt="redcrystal" style="width:128px;height:128px;"></div>
+				<div class="col-md-3">
+					<img class="purplecrystal" src="assets/images/purplecrystal.png" alt="purplecrystal" style="width:128px;height:128px;"></div>
+			</div>
+
+			<br>
+
+			<div class="row">
+
+				<h4 class="stats">Your Stats!</h4>
+				<p> Wins: <span id="winscounter"></span></p>
+				<p> Losses: <span id="losscounter"></span></p>
+			</div>
+
+
+<script>
+
+
+	
+			var number = Math.floor(Math.random() * 101 + 19); // generates a number between 19 and 120 using ((y-x)+1 + x) formula if x is your start number and y is your end number in a range. 
+
+			// this is what the use will guess
+
+
+
+					// these generate the values for each crystal between 1 and 12. 
+			var clear = Math.floor(Math.random() * 12 + 1) ; 
+			var blue = Math.floor(Math.random() * 12 + 1) ; 			
+			var red = Math.floor(Math.random() * 12 + 1) ; 
+			var purple = Math.floor(Math.random() * 12 + 1) ; 
+
+
+			var guessScore = 0;
+			var wins = 0;
+			var losses = 0; 
+
+			$(".numbertomatch").html(number);   // displays the random number to be matched. 
+
+			$(".clearcrystal").click(function(){
+
+				thegame(clear);
+			});
+
+			$(".bluecrystal").click(function(){
+
+				thegame(blue);
+			});
+
+			$(".redcrystal").click(function(){
+
+			thegame(red);
+			});
+
+			$(".purplecrystal").click(function(){
+
+			thegame(purple);
+			});
+
+
+
+
+
+
+
+			function reset(){
+
+					number = Math.floor(Math.random() * 101 + 19);
+					$(".numbertomatch").html(number); 
+					var clear = Math.floor(Math.random() * 12 + 1) ; 
+					var blue = Math.floor(Math.random() * 12 + 1) ; 			
+					var red = Math.floor(Math.random() * 12 + 1) ; 
+					var purple = Math.floor(Math.random() * 12 + 1) ; 
+					guessScore = 0; 
+					$(".guessScoredisplay").html(guessScore);
+
+
+			};
+
+	
+			function thegame(color){
+
+
+					guessScore += color; 
+					$(".guessScoredisplay").empty();
+					$(".guessScoredisplay").append(guessScore); 
+					if (guessScore > number) {
+
+						losses++; 
+						$("#losscounter").html(losses); 
+						reset(); 
+					}
+
+					else if (guessScore == number){
+
+						wins++; 
+						$("#winscounter").html(wins);
+						reset();
+					}
+
+
+
+
+
+
+			};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
